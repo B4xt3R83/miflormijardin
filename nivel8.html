@@ -92,7 +92,7 @@
       margin-right: auto;
     }
 
-    .audio-button {
+    .audio-button, .infinito-button {
       margin: 2rem auto;
       z-index: 1;
       position: relative;
@@ -100,7 +100,6 @@
 
     .play-btn {
       display: inline-block;
-      margin: 2rem auto;
       padding: 1rem 2rem;
       font-size: 1.2rem;
       font-weight: bold;
@@ -169,7 +168,8 @@
   <img src="titulo8.png" alt="Nivel 8" class="titulo-nivel">
 
   <div class="audio-button">
-    <audio controls id="audioNarracion">
+    <button class="play-btn" onclick="document.getElementById('audioNarracion').play()">🎵 Dale al play</button>
+    <audio id="audioNarracion">
       <source src="narracion8.mp3" type="audio/mpeg">
       Tu navegador no soporta audio.
     </audio>
@@ -190,7 +190,9 @@ Que empiece nuestro nivel infinito.
 ¡Te amo!
   </p>
 
-  <button class="play-btn" onclick="activarInfinito(this)">Pulsa para nivel infinito</button>
+  <div class="infinito-button">
+    <button class="play-btn" onclick="activarInfinito(this)">Pulsa para nivel infinito</button>
+  </div>
 
   <div id="contador">Somos pareja: 0 días, 0 horas, 0 minutos y 0 segundos ❤️</div>
 
@@ -214,8 +216,6 @@ Que empiece nuestro nivel infinito.
     }
 
     function activarInfinito(btn) {
-      const audio = document.getElementById("audioNarracion");
-      audio.play();
       btn.innerText = "Botón del infinito pulsado";
       btn.disabled = true;
 
