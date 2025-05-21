@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nivel 5</title>
+  <style>
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      min-height: 100vh;
+      background: url('fondo.jpg') no-repeat center center / cover;
+      opacity: 0.25;
+      z-index: 0;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ffcccc, #ffe6f0);
+      min-height: 100vh;
+      overflow-x: hidden;
+      overflow-y: auto;
+      color: #b30059;
+      text-align: center;
+      position: relative;
+    }
+
+    .heart-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ff4d88;
+      transform: rotate(45deg);
+      animation: float 8s linear infinite;
+      opacity: 0.7;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ff4d88;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    .flower {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      background: url('flor.png') no-repeat center/contain;
+      animation: float 12s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) scale(0.5) rotate(45deg); opacity: 0; }
+      50% { opacity: 0.9; }
+      100% { transform: translateY(-20vh) scale(1) rotate(45deg); opacity: 0; }
+    }
+
+    .titulo, .titulo-nivel {
+      margin-top: 2rem;
+      width: 80%;
+      max-width: 600px;
+      animation: fadeIn 2s ease-in-out;
+      z-index: 1;
+      position: relative;
+    }
+
+    .audio-button {
+      margin-top: 2rem;
+      z-index: 1;
+      position: relative;
+    }
+
+    p {
+      white-space: pre-wrap;
+      max-width: 90%;
+      margin: 2rem auto;
+      font-size: 1.1rem;
+      z-index: 1;
+      position: relative;
+      animation: fadeIn 3s ease-in-out;
+    }
+
+    .foto {
+      max-width: 90%;
+      margin: 2rem auto;
+      display: block;
+      animation: fadeIn 4s ease-in-out;
+      z-index: 1;
+      position: relative;
+    }
+
+    .buttons {
+      margin: 3rem auto;
+      display: flex;
+      justify-content: center;
+      animation: fadeIn 5s ease-in-out;
+      z-index: 1;
+      position: relative;
+    }
+
+    button {
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      background-color: #ff4d88;
+      color: white;
+    }
+
+    button:hover {
+      background-color: #e6005c;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="heart-container" id="heart-container"></div>
+
+  <div>
+    <img src="titulo.png" alt="Título general" class="titulo">
+  </div>
+  <div style="margin-top: 1rem;">
+    <img src="titulo5.png" alt="Nivel 5" class="titulo-nivel">
+  </div>
+
+  <div class="audio-button">
+    <audio controls>
+      <source src="narracion5.mp3" type="audio/mpeg">
+      Tu navegador no soporta audio.
+    </audio>
+  </div>
+
+  <p>
+No todo ha sido un camino de rosas… pero si cabe descartar el día que iba con intención de dejarte (el que te comieron la cabeza) o el de tu cumple… 
+
+Quizá me faltó empatía ya que creo que yo sí que estaba mejorando mucho y tú te quedaste estancada dada tu situación personal. 
+
+Creo que si no nos hubieran pasado estas cosas no tendríamos esto tan reforzado. 
+
+A veces las situaciones difíciles, las charlas incómodas y todo eso son las que refuerzan de verdad. 
+
+Y le doy gracias a tu comportamiento y al mío, a nuestras cagadas… ya que sin esas cosas no tendríamos algo tan sano y tan fuerte…
+</p>
+
+
+  <div class="buttons">
+    <button onclick="window.location.href='nivel6.html'">Siguiente nivel</button>
+  </div>
+
+  <script>
+    const container = document.getElementById('heart-container');
+    for (let i = 0; i < 20; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (6 + Math.random() * 4) + 's';
+      container.appendChild(heart);
+    }
+    for (let i = 0; i < 10; i++) {
+      const flower = document.createElement('div');
+      flower.classList.add('flower');
+      flower.style.left = Math.random() * 100 + 'vw';
+      flower.style.animationDuration = (8 + Math.random() * 6) + 's';
+      container.appendChild(flower);
+    }
+  </script>
+</body>
+</html>
