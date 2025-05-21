@@ -95,10 +95,33 @@
       position: relative;
     }
 
-    .audio-button {
-      margin-top: 2rem;
+    .play-btn {
+      display: inline-block;
+      margin: 2rem auto;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: white;
+      background: #ff4d88;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #ff4d88;
+      animation: pulse 2s infinite;
+      transition: transform 0.3s ease;
       z-index: 1;
       position: relative;
+    }
+
+    .play-btn:hover {
+      transform: scale(1.05);
+      background-color: #e6005c;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 10px #ff4d88; }
+      50% { box-shadow: 0 0 20px #ff99bb; }
+      100% { box-shadow: 0 0 10px #ff4d88; }
     }
 
     p {
@@ -160,12 +183,11 @@
     <img src="titulo2.png" alt="Nivel 2" class="titulo-nivel">
   </div>
 
-  <div class="audio-button">
-    <audio controls>
-      <source src="narracion2.mp3" type="audio/mpeg">
-      Tu navegador no soporta audio.
-    </audio>
-  </div>
+  <button class="play-btn" onclick="reproducirAudio()">🎵 Dale al play</button>
+  <audio id="audioNarracion">
+    <source src="narracion2.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio.
+  </audio>
 
   <p>
 Como toda historia todo tiene un comienzo… y lo nuestro pues fue un comienzo bonito, como deben de comenzar estas cosas.. empezó sin más y conociendo el uno del otro, si no es por lo que me pasó creo que no hubiéramos llegado a esto. Ahí me demostraste lo gran persona que eres, pero sobre todo lo gran amiga ya que sin conocerme te abriste a escucharme y a aconsejarme… después te abriste tú… me contaste tu historia.. todo esto nos hizo empatizar mucho… me juzgaste mucho, me acusaste de no tener personalidad, de ser influenciable y me abriste los ojos… es verdad ya que había perdido mi identidad… después llegaron las ferias…
@@ -192,6 +214,12 @@ Como toda historia todo tiene un comienzo… y lo nuestro pues fue un comienzo b
       flower.style.left = Math.random() * 100 + 'vw';
       flower.style.animationDuration = (8 + Math.random() * 6) + 's';
       container.appendChild(flower);
+    }
+
+    function reproducirAudio() {
+      const audio = document.getElementById("audioNarracion");
+      audio.play();
+      document.querySelector(".play-btn").style.display = "none";
     }
   </script>
 </body>
