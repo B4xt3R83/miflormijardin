@@ -185,7 +185,6 @@ Que empiece nuestro nivel infinito.
   <img src="foto8.jpg" alt="Foto del nivel 8" class="foto">
 
   <script>
-    // Animaciones flotantes
     const container = document.getElementById('heart-container');
     for (let i = 0; i < 20; i++) {
       const heart = document.createElement('div');
@@ -202,14 +201,12 @@ Que empiece nuestro nivel infinito.
       container.appendChild(flower);
     }
 
-    // Reproducir audio y ocultar botón
     function reproducirAudio() {
       const audio = document.getElementById("audioNarracion");
       audio.play();
       document.querySelector(".play-btn").style.display = "none";
     }
 
-    // Contador desde que se entra a la página
     const inicio = new Date();
     const contador = document.getElementById("contador");
 
