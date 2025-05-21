@@ -115,6 +115,13 @@
       background-color: #e6005c;
     }
 
+    .play-btn:disabled {
+      background-color: #999;
+      box-shadow: none;
+      cursor: default;
+      animation: none;
+    }
+
     @keyframes pulse {
       0% { box-shadow: 0 0 10px #ff4d88; }
       50% { box-shadow: 0 0 20px #ff99bb; }
@@ -162,12 +169,7 @@
   <img src="titulo.png" alt="Título general" class="titulo">
   <img src="titulo8.png" alt="Nivel 8" class="titulo-nivel">
 
-  <!-- Botón personalizado para reproducir audio -->
-  <button class="play-btn" onclick="reproducirAudio()">🎵 Dale al play</button>
-  <audio id="audioNarracion">
-    <source src="narracion8.mp3" type="audio/mpeg">
-    Tu navegador no soporta audio.
-  </audio>
+  <button class="play-btn" id="btnInfinito" onclick="activarNivelInfinito()">💖 Pulsa para nivel infinito</button>
 
   <p>
 Todo tiene un porqué… tu número preferido es el 8… este nivel es el 8… y ¿cuántos meses hacemos juntos?… 8
@@ -205,27 +207,38 @@ Que empiece nuestro nivel infinito.
       container.appendChild(flower);
     }
 
-    function reproducirAudio() {
-      const audio = document.getElementById("audioNarracion");
-      audio.play();
-      document.querySelector(".play-btn").style.display = "none";
+    function activarNivelInfinito() {
+      const btn = document.getElementById("btnInfinito");
+      btn.innerText = "💘 Nivel infinito activado";
+      btn.disabled = true;
+      localStorage.setItem("inicioNivelInfinito", new Date().toISOString());
+      iniciarContador();
     }
 
-    const inicio = new Date();
-    const contador = document.getElementById("contador");
-
-    function actualizarContador() {
-      const ahora = new Date();
-      const diferencia = ahora - inicio;
-      const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-      const horas = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
-      const minutos = Math.floor((diferencia / (1000 * 60)) % 60);
-      const segundos = Math.floor((diferencia / 1000) % 60);
-      contador.innerText = `Somos pareja: ${dias} días, ${horas} horas, ${minutos} minutos y ${segundos} segundos ❤️`;
+    function iniciarContador() {
+      const inicioGuardado = localStorage.getItem("inicioNivelInfinito");
+      if (!inicioGuardado) return;
+      const inicio = new Date(inicioGuardado);
+      const contador = document.getElementById("contador");
+      function actualizarContador() {
+        const ahora = new Date();
+        const diferencia = ahora - inicio;
+        const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+        const horas = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
+        const minutos = Math.floor((diferencia / (1000 * 60)) % 60);
+        const segundos = Math.floor((diferencia / 1000) % 60);
+        contador.innerText = `Somos pareja: ${dias} días, ${horas} horas, ${minutos} minutos y ${segundos} segundos ❤️`;
+      }
+      setInterval(actualizarContador, 1000);
+      actualizarContador();
     }
 
-    setInterval(actualizarContador, 1000);
-    actualizarContador();
+    if (localStorage.getItem("inicioNivelInfinito")) {
+      const btn = document.getElementById("btnInfinito");
+      btn.innerText = "💘 Nivel infinito activado";
+      btn.disabled = true;
+      iniciarContador();
+    }
   </script>
 </body>
 </html>
