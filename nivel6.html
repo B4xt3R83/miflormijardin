@@ -95,10 +95,33 @@
       position: relative;
     }
 
-    .audio-button {
-      margin-top: 2rem;
+    .play-btn {
+      display: inline-block;
+      margin: 2rem auto;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: white;
+      background: #ff4d88;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #ff4d88;
+      animation: pulse 2s infinite;
+      transition: transform 0.3s ease;
       z-index: 1;
       position: relative;
+    }
+
+    .play-btn:hover {
+      transform: scale(1.05);
+      background-color: #e6005c;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 10px #ff4d88; }
+      50% { box-shadow: 0 0 20px #ff99bb; }
+      100% { box-shadow: 0 0 10px #ff4d88; }
     }
 
     p {
@@ -160,12 +183,11 @@
     <img src="titulo6.png" alt="Nivel 6" class="titulo-nivel">
   </div>
 
-  <div class="audio-button">
-    <audio controls>
-      <source src="narracion6.mp3" type="audio/mpeg">
-      Tu navegador no soporta audio.
-    </audio>
-  </div>
+  <button class="play-btn" onclick="reproducirAudio()">🎵 Dale al play</button>
+  <audio id="audioNarracion">
+    <source src="narracion6.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio.
+  </audio>
 
   <p>
 Pues el regalo eres tú! Y espero ser también el tuyo… me has dado una vida, me has dado una pequeñaja a quien cuidar, me has dado algo por lo que despertarme cada día y seguir luchando, me has dado fuerza para conseguir todos mis objetivos! Y los he cumplido eh! A tiempo récord y demostrándote quién soy realmente! Ahora te toca a ti! Te toca ser fuerte, pasar tu juicio y sea lo que sea no perder tu identidad, te toca luchar por tu futuro! Y sea lo que sea debes ser fuerte, agárrame la mano y no me sueltes amor… Y al igual que estuviste conmigo en ese momento de estudio estaré contigo ayudándote en lo que necesites… Lo vas a conseguir tesoro, si hay algo que destaca, si hay algo que más me enamora de ti, es tu inteligencia, eres tremenda, no hay nada mejor que tener a tu lado a alguien tan inteligente… y una vez que consigas tu objetivo, prometo construir ese futuro que tanto hablamos con vosotras para tener la vida que siempre hemos soñado… a sí que… a por ello tesoro! 
@@ -208,6 +230,12 @@ Te amo princesa.
       flower.style.left = Math.random() * 100 + 'vw';
       flower.style.animationDuration = (8 + Math.random() * 6) + 's';
       container.appendChild(flower);
+    }
+
+    function reproducirAudio() {
+      const audio = document.getElementById("audioNarracion");
+      audio.play();
+      document.querySelector(".play-btn").style.display = "none";
     }
   </script>
 </body>

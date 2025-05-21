@@ -88,10 +88,33 @@
       position: relative;
     }
 
-    .audio-button {
-      margin-top: 2rem;
+    .play-btn {
+      display: inline-block;
+      margin: 2rem auto;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: white;
+      background: #ff4d88;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #ff4d88;
+      animation: pulse 2s infinite;
+      transition: transform 0.3s ease;
       z-index: 1;
       position: relative;
+    }
+
+    .play-btn:hover {
+      transform: scale(1.05);
+      background-color: #e6005c;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 10px #ff4d88; }
+      50% { box-shadow: 0 0 20px #ff99bb; }
+      100% { box-shadow: 0 0 10px #ff4d88; }
     }
 
     p {
@@ -163,12 +186,11 @@
     <img src="titulo7.png" alt="Nivel 7" class="titulo-nivel">
   </div>
 
-  <div class="audio-button">
-    <audio controls>
-      <source src="narracion7.mp3" type="audio/mpeg">
-      Tu navegador no soporta audio.
-    </audio>
-  </div>
+  <button class="play-btn" onclick="reproducirAudio()">🎵 Dale al play</button>
+  <audio id="audioNarracion">
+    <source src="narracion7.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio.
+  </audio>
 
   <p>
 Flor! ¿Qué tal la experiencia!???
@@ -220,6 +242,12 @@ Si bajas los verás con la gran pregunta…
 
     setInterval(actualizarReloj, 1000);
     actualizarReloj();
+
+    function reproducirAudio() {
+      const audio = document.getElementById("audioNarracion");
+      audio.play();
+      document.querySelector(".play-btn").style.display = "none";
+    }
   </script>
 </body>
 </html>
