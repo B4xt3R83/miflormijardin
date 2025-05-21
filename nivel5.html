@@ -95,10 +95,33 @@
       position: relative;
     }
 
-    .audio-button {
-      margin-top: 2rem;
+    .play-btn {
+      display: inline-block;
+      margin: 2rem auto;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: white;
+      background: #ff4d88;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #ff4d88;
+      animation: pulse 2s infinite;
+      transition: transform 0.3s ease;
       z-index: 1;
       position: relative;
+    }
+
+    .play-btn:hover {
+      transform: scale(1.05);
+      background-color: #e6005c;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 10px #ff4d88; }
+      50% { box-shadow: 0 0 20px #ff99bb; }
+      100% { box-shadow: 0 0 10px #ff4d88; }
     }
 
     p {
@@ -160,12 +183,11 @@
     <img src="titulo5.png" alt="Nivel 5" class="titulo-nivel">
   </div>
 
-  <div class="audio-button">
-    <audio controls>
-      <source src="narracion5.mp3" type="audio/mpeg">
-      Tu navegador no soporta audio.
-    </audio>
-  </div>
+  <button class="play-btn" onclick="reproducirAudio()">🎵 Dale al play</button>
+  <audio id="audioNarracion">
+    <source src="narracion5.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio.
+  </audio>
 
   <p>
 No todo ha sido un camino de rosas… pero si cabe descartar el día que iba con intención de dejarte (el que te comieron la cabeza) o el de tu cumple… 
@@ -178,7 +200,6 @@ A veces las situaciones difíciles, las charlas incómodas y todo eso son las qu
 
 Y le doy gracias a tu comportamiento y al mío, a nuestras cagadas… ya que sin esas cosas no tendríamos algo tan sano y tan fuerte…
 </p>
-
 
   <div class="buttons">
     <button onclick="window.location.href='nivel6.html'">Siguiente nivel</button>
@@ -199,6 +220,12 @@ Y le doy gracias a tu comportamiento y al mío, a nuestras cagadas… ya que sin
       flower.style.left = Math.random() * 100 + 'vw';
       flower.style.animationDuration = (8 + Math.random() * 6) + 's';
       container.appendChild(flower);
+    }
+
+    function reproducirAudio() {
+      const audio = document.getElementById("audioNarracion");
+      audio.play();
+      document.querySelector(".play-btn").style.display = "none";
     }
   </script>
 </body>
