@@ -88,6 +88,12 @@
       position: relative;
     }
 
+    .audio-button {
+      margin-top: 2rem;
+      z-index: 1;
+      position: relative;
+    }
+
     p {
       white-space: pre-wrap;
       max-width: 90%;
@@ -117,35 +123,6 @@
       position: relative;
     }
 
-    .play-btn {
-      display: inline-block;
-      margin: 2rem auto;
-      padding: 1rem 2rem;
-      font-size: 1.2rem;
-      font-weight: bold;
-      color: white;
-      background: #ff4d88;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      box-shadow: 0 0 10px #ff4d88;
-      animation: pulse 2s infinite;
-      transition: transform 0.3s ease;
-      z-index: 1;
-      position: relative;
-    }
-
-    .play-btn:hover {
-      transform: scale(1.05);
-      background-color: #e6005c;
-    }
-
-    @keyframes pulse {
-      0% { box-shadow: 0 0 10px #ff4d88; }
-      50% { box-shadow: 0 0 20px #ff99bb; }
-      100% { box-shadow: 0 0 10px #ff4d88; }
-    }
-
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -155,15 +132,19 @@
 <body>
   <div class="heart-container" id="heart-container"></div>
 
-  <img src="titulo.png" alt="Título general" class="titulo">
-  <img src="titulo8.png" alt="Nivel 8" class="titulo-nivel">
+  <div>
+    <img src="titulo.png" alt="Título general" class="titulo">
+  </div>
+  <div style="margin-top: 1rem;">
+    <img src="titulo8.png" alt="Nivel 8" class="titulo-nivel">
+  </div>
 
-  <!-- Botón personalizado para reproducir audio -->
-  <button class="play-btn" onclick="reproducirAudio()">🎵 Dale al play</button>
-  <audio id="audioNarracion">
-    <source src="narracion8.mp3" type="audio/mpeg">
-    Tu navegador no soporta audio.
-  </audio>
+  <div class="audio-button">
+    <audio controls>
+      <source src="narracion8.mp3" type="audio/mpeg">
+      Tu navegador no soporta audio.
+    </audio>
+  </div>
 
   <p>
 Todo tiene un porqué… tu número preferido es el 8… este nivel es el 8… y ¿cuántos meses hacemos juntos?… 8
@@ -180,7 +161,7 @@ Que empiece nuestro nivel infinito.
 ¡Te amo!
   </p>
 
-  <div id="contador">Somos pareja: 0 días, 0 horas, 0 minutos y 0 segundos ❤️</div>
+  <div id="contador">Llevamos juntos: 0 días, 0 horas, 0 minutos y 0 segundos ❤️</div>
 
   <img src="foto8.jpg" alt="Foto del nivel 8" class="foto">
 
@@ -202,14 +183,7 @@ Que empiece nuestro nivel infinito.
       container.appendChild(flower);
     }
 
-    // Reproducir audio y ocultar botón
-    function reproducirAudio() {
-      const audio = document.getElementById("audioNarracion");
-      audio.play();
-      document.querySelector(".play-btn").style.display = "none";
-    }
-
-    // Contador desde que se entra a la página
+    // Contador desde que se carga la página
     const inicio = new Date();
     const contador = document.getElementById("contador");
 
